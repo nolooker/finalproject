@@ -67,9 +67,9 @@
               <ul class="dropdown">
                 <li><a href="/admin/products/new" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품 등록</a></li>
                 <li class="has-children">
-                  <a href="/admin/products" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품 목록</a>
+                  <a href="/admin/products">상품 목록</a>
                   <ul class="dropdown">
-                    <li><a href="">파티룸</a></li>
+                    <li><a href="/product/{productId}">파티룸</a></li>
                     <li><a href="#">야구장</a></li>
                     <li><a href="#">농구장</a></li>
                   </ul>

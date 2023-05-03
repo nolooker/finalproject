@@ -6,7 +6,7 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Getter@Setter@ToString
+@Getter @Setter @ToString
 public class ProductDto {
     private Long id;
     private String name;

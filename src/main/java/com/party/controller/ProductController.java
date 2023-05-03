@@ -71,4 +71,17 @@ public class ProductController {
         return "product/prList" ;
     }
 
+    @GetMapping(value = "/product/{productId}")
+    // 일반 사용자가 상품을 클릭하여 상세 페이지로 이동
+    public String productDetail(Model model, @PathVariable("productId") Long productId) {
+
+        ProductFormDto dto = productService.getProductDetail(productId) ;
+
+        model.addAttribute("product", dto) ;
+
+
+        return "product/prDetail" ;
+
+    }
+
 }

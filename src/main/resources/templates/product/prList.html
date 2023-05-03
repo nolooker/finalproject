@@ -38,6 +38,13 @@
     </style>
 </th:block>
 
+<div class="d-flex">
+  <!--/* 대표 이미지 영역 */-->
+  <div class="repImgDiv">
+    <img class="rounded repImg" th:alt="${product.name}" th:src="${product.productImageDtoList[0].imageUrl}">
+  </div>
+</div>
+
 <div class="content" layout:fragment="content">
   <form th:action="@{'/admin/products/' + ${products.number}}" role="form" method="get" th:object="${products}">
     <!-- /* 데이터 목록 */ -->
@@ -49,6 +56,7 @@
         <td>인원수</td>
         <td>가격</td>
         <td>상세 설명</td>
+        <td>예약 상태</td>
       </tr>
       </thead>
       <tbody>
@@ -58,6 +66,12 @@
         <td>
           <a th:href="'/admin/products/'+${bean.id}" th:text="${bean.name}"></a>
         </td>
+
+        <td th:text="${bean.fit}"></td>
+
+        <td th:text="${bean.price}"></td>
+
+        <td th:text="${bean.description}"></td>
 
         <td th:text="${bean.productStatus == T(com.party.constant.ProductStatus).RESERVE ? '예약중' : '예약불가'}"></td>
 
