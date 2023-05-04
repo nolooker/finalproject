@@ -66,7 +66,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">정원수</span>
             </div>
-            <input type="text" th:field="*{fit}" class="form-control" placeholder="정우너수(를) 입력해주세요.">
+            <input type="text" th:field="*{fit}" class="form-control" placeholder="정원수(를) 입력해주세요.">
         </div>
         <p th:if="${#fields.hasErrors('fit')}" th:errors="*{fit}" class="fieldError">Invalid Data</p>
 

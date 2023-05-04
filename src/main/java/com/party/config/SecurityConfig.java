@@ -27,12 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/" );
+
 
 
         http.authorizeRequests()
                 .mvcMatchers("/","/members/**","/products/**","/images/**").permitAll()
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
+                .mvcMatchers("/host/**").hasRole("HOST")
 
                 .anyRequest().authenticated();
 

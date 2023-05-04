@@ -1,6 +1,7 @@
 package com.party.sevice;
 
 import com.party.entity.Member;
+import com.party.mapper.MemberMapperInterface;
 import com.party.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
@@ -10,11 +11,22 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
+    private final MemberMapperInterface memberMapperInterface ;
+
+    public Member SelectOne(Integer id){
+        return memberMapperInterface.SelectOne(id) ;
+    }
+
+    public List<Member> SelectAll(){
+        return memberMapperInterface.SelectAll();
+    }
 
     @Override //Securityconfig 에 usernameParameter("email") 과 같은
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

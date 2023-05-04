@@ -38,19 +38,13 @@
     </style>
 </th:block>
 
-<div class="d-flex">
-  <!--/* 대표 이미지 영역 */-->
-  <div class="repImgDiv">
-    <img class="rounded repImg" th:alt="${product.name}" th:src="${product.productImageDtoList[0].imageUrl}">
-  </div>
-</div>
-
-<div class="content" layout:fragment="content">
+    <div class="content" layout:fragment="content">
   <form th:action="@{'/admin/products/' + ${products.number}}" role="form" method="get" th:object="${products}">
     <!-- /* 데이터 목록 */ -->
     <table class="table">
       <thead>
       <tr>
+        <td>파티룸</td>
         <td>등록 번호</td>
         <td>상품명</td>
         <td>인원수</td>
@@ -61,6 +55,12 @@
       </thead>
       <tbody>
       <tr th:each="bean, status: ${products.getContent()}">  <!--ProductController에서 products 연동-->
+        <td>
+          <a th:href="'/product/' + ${bean.id}" class="img">
+            <!-- bean의 imageUrl 속성을 사용하여 이미지 출력 -->
+          </a>
+        </td>
+
         <td th:text="${bean.id}"></td>
 
         <td>
@@ -100,15 +100,15 @@
 
     <!-- /* 필드 검색 */ -->
     <div class="form-inline justify-content-center" th:object="${searchDto}">
-        <select th:field="*{productStatus}" class="form-control" style="width:auto;">
-          <option value="">전체 보기</option>
-          <option value="RESERVE">예약가능</option>
-          <option value="NOT_RESERVE">예약불가</option>
-        </select>
-<!--        <select th:field="*{searchBy}" class="form-control" style="width:auto;">-->
-<!--          <option value="name">상품명</option>-->
-<!--&lt;!&ndash;          <option value="createdBy">등록자</option>&ndash;&gt;-->
-<!--        </select>-->
+      <select th:field="*{productStatus}" class="form-control" style="width:auto;">
+        <option value="">전체 보기</option>
+        <option value="RESERVE">예약가능</option>
+        <option value="NOT_RESERVE">예약불가</option>
+      </select>
+      <!--        <select th:field="*{searchBy}" class="form-control" style="width:auto;">-->
+      <!--          <option value="name">상품명</option>-->
+      <!--&lt;!&ndash;          <option value="createdBy">등록자</option>&ndash;&gt;-->
+      <!--        </select>-->
       <input th:field="*{searchQuery}" class="form-control" type="text" placeholder="검색어를 입력해 주세요.">
       <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
     </div>

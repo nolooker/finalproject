@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,17 +23,33 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
+
+    @GetMapping(value = "/detail/{id}")
+    public String SelectOne(@PathVariable("id") Integer id, Model model) {  // 상세 보기
+        Member member = memberService.SelectOne(id);
+        model.addAttribute("member", member);
+        return "member/memberDetail";
+
+    }
+
+    @GetMapping(value = "/list")
+    public String SelectAll(Model model){
+        List<Member> memberList = memberService.SelectAll();
+        model.addAttribute("list", memberList) ;
+        return "member/memberList" ;
+    }
+
     @GetMapping("/new")
     public String memberForm(Model model){
         //타임 리프에서 사용할 객체 memberFormDto를 바인딩 합니다.
         model.addAttribute("memberFormDto",new MemberFormDto());
-        return "/member/memberForm";
+        return "member/memberForm";
 
     }
     @PostMapping("/new")
     public String newMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult,Model model){
         if(bindingResult.hasErrors()){
-            return "/member/memberForm";
+            return "member/memberForm";
         }
         try {
             Member member =Member.createMember(memberFormDto,passwordEncoder);
