@@ -51,6 +51,8 @@
         <td>가격</td>
         <td>상세 설명</td>
         <td>예약 상태</td>
+        <td>수정</td>
+        <td>삭제</td>
       </tr>
       </thead>
       <tbody>
@@ -74,6 +76,13 @@
         <td th:text="${bean.description}"></td>
 
         <td th:text="${bean.productStatus == T(com.party.constant.ProductStatus).RESERVE ? '예약중' : '예약불가'}"></td>
+
+        <td>
+          <a th:href="'/product/update/'+${bean.no}" th:text="수정"></a>
+        </td>
+        <td>
+          <a th:href="'/board/delete/'+${bean.no}" th:text="삭제"></a>
+        </td>
 
       </tr>
       </tbody>
