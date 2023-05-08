@@ -1,5 +1,6 @@
 package com.party.sevice;
 
+import com.party.dto.ProductImageDto;
 import com.party.entity.ProductImage;
 import com.party.repository.ProductImageRepository;
 import lombok.RequiredArgsConstructor;
@@ -57,5 +58,10 @@ public class ProductImageService {
             previousImage.updateProductImage(oriImageName, imageName, imageURl);
         }
 
+    }
+
+    public ProductImageDto getProductImage(Long id) {
+        ProductImageDto dto = ProductImageDto.of(productImageRepository.findById(id).orElseThrow(EntityNotFoundException::new));
+        return dto ;
     }
 }

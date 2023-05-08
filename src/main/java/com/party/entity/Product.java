@@ -15,7 +15,7 @@ public class Product extends BaseEntity {
 
     @Id
     @Column(name = "room_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false,length = 50)

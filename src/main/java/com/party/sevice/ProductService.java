@@ -59,7 +59,7 @@ public class ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(EntityNotFoundException::new);
 
-        ProductFormDto dto =ProductFormDto.of(product);
+        ProductFormDto dto = ProductFormDto.of(product);
 
         dto.setProductImageDtoList(productImageDtoList);
 

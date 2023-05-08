@@ -29,15 +29,18 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom{
                                 product.id,
                                 product.name,
                                 product.description,
+                                product.fit,
                                 productImage.imageUrl,
-                                product.price
+                                product.price,
+                                product.productStatus
                         )
                 )
                 .from(productImage)
                 .join(productImage.product,product)
                 .where(productImage.repImageYesNo.eq("Y"))
-                .where(likeCondition(searchDto.getSearchQuery()))
-                .orderBy(product.id.desc())
+                .where(sellStatusCondition(searchDto.getProductStatus()),
+                        searchByCondition(searchDto.getSearchBy(),searchDto.getSearchQuery()))
+                .orderBy(QProduct.product.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();

@@ -50,45 +50,44 @@
         <p class="h2">
             상품 수정
         </p>
-
-        <input type="text" th:field="*{id}" >
-
+        <input type="hidden" th:field="*{id}">
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">상품명</span>
             </div>
-            <input type="text" th:field="*{name}" class="form-control" placeholder="상품명을 입력해주세요.">
+            <input type="text" th:field="*{name}" class="form-control" placeholder="상품명을(를) 입력해주세요.">
         </div>
         <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Invalid Data</p>
 
         <div class="input-group">
             <div class="input-group-prepend">
+                <span class="input-group-text">정원수</span>
+            </div>
+            <input type="text" th:field="*{fit}" class="form-control" placeholder="정원수(를) 입력해주세요.">
+        </div>
+        <p th:if="${#fields.hasErrors('fit')}" th:errors="*{fit}" class="fieldError">Invalid Data</p>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
                 <span class="input-group-text">가격</span>
             </div>
-            <input type="text" th:field="*{price}" class="form-control" placeholder="가격을 입력해주세요.">
+            <input type="text" th:field="*{price}" class="form-control" placeholder="가격을(를) 입력해주세요.">
         </div>
         <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="fieldError">Invalid Data</p>
 
         <div class="input-group">
             <div class="input-group-prepend">
-                <span class="input-group-text">재고</span>
+                <span class="input-group-text">상품 상세 설명</span>
             </div>
-            <input type="text" th:field="*{stock}" class="form-control" placeholder="재고를 입력해주세요.">
-        </div>
-        <p th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" class="fieldError">Invalid Data</p>
-
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">상품 설명</span>
-            </div>
-            <textarea type="text" th:field="*{description}" class="form-control" placeholder="상품 설명을 입력해주세요."></textarea>
+            <textarea type="text" th:field="*{description}" class="form-control" placeholder="상품 상세 설명을(를) 해주세요.">
+            </textarea>
         </div>
         <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="fieldError">Invalid Data</p>
 
         <div class="form-group">
             <select th:field="*{productStatus}" class="custom-select">
-                <option value="SELL">판매중</option>
-                <option value="SOLD_OUT">품절</option>
+                <option value="RESERVE">예약중</option>
+                <option value="NOT_RESERVE">품절</option>
             </select>
         </div>
 
@@ -105,7 +104,7 @@
 
 
         <div style="text-align:center" th:if="${not #strings.isEmpty(productFormDto.id)}">
-            <button th:formaction="@{'/admin/products/' + ${productFormDto.id}}" type="submit" class="btn btn-primary">상품 수정</button>
+            <button th:formaction="@{'/admin/product/' + ${productFormDto.id}}" type="submit" class="btn btn-primary">상품 수정</button>
         </div>
 
         <!-- 보안 관련 인증 토큰을 히든 파라미터로 보냄-->
